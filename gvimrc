@@ -1,38 +1,38 @@
-" vim:set ts=8 sts=2 sw=2 tw=0: (���ιԤ˴ؤ��Ƥ�:help modeline�򻲾�)
+" vim:set ts=8 sts=2 sw=2 tw=0: (この行に関しては:help modelineを参照)
 "
 " An example for a Japanese version gvimrc file.
-" ���ܸ��ǤΥǥե����GUI����ե�����(gvimrc) - Vim7�ѻ��
+" 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 19-Sep-2015.
+" Last Change: 20-Sep-2015.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
-" ����:
-" ���Υե�����ˤ�Vim�ε�ư����ɬ�����ꤵ��롢GUI��Ϣ�����꤬�񤫤�Ƥ���
-" �����Խ����ε�ư�˴ؤ��������vimrc�˽񤫤���Ƥ��ޤ���
+" 解説:
+" このファイルにはVimの起動時に必ず設定される、GUI関連の設定が書かれていま
+" す。編集時の挙動に関する設定はvimrcに書かかれています。
 "
-" �Ŀ��������_gvimrc�Ȥ����ե����������������ǹԤʤ��ޤ���_gvimrc�Ϥ���
-" �ե�����θ���ɹ��ޤ�뤿�ᡢ�����˽񤫤줿���Ƥ��񤭤������ꤹ�뤳�Ȥ�
-" ����ޤ���_gvimrc��$HOME�ޤ���$VIM���֤��Ƥ���ɬ�פ�����ޤ���$HOME��$VIM
-" ����ͥ�褵�졢$HOME�ǤߤĤ��ä����$VIM���ɹ��ޤ�ޤ���
+" 個人用設定は_gvimrcというファイルを作成しそこで行ないます。_gvimrcはこの
+" ファイルの後に読込まれるため、ここに書かれた内容を上書きして設定することが
+" 出来ます。_gvimrcは$HOMEまたは$VIMに置いておく必要があります。$HOMEは$VIM
+" よりも優先され、$HOMEでみつかった場合$VIMは読込まれません。
 "
-" �����Ը�����������ե������ľ�ܽ񤭴������˺Ѥޤ��뤳�Ȥ���Ū�Ȥ��ơ�����
-" �ȥ��������������̥ե�����ǹԤʤ���褦����θ���Ƥ���ޤ���Vim��ư����
-" �����ȥ������������ե�����($VIM/gvimrc_local.vim)��¸�ߤ���ʤ�С�����
-" ��ե�����μ�����ʬ���ɤ߹��ޤ�����˼�ưŪ���ɤ߹��ߤޤ���
+" 管理者向けに本設定ファイルを直接書き換えずに済ませることを目的として、サイ
+" トローカルな設定を別ファイルで行なえるように配慮してあります。Vim起動時に
+" サイトローカルな設定ファイル($VIM/gvimrc_local.vim)が存在するならば、本設
+" 定ファイルの主要部分が読み込まれる前に自動的に読み込みます。
 "
-" �ɤ߹��߸塢�ѿ�g:gvimrc_local_finish����0���ͤ����ꤵ��Ƥ������ˤ�����
-" ��ե�����˽񤫤줿���Ƥϰ��ڼ¹Ԥ���ޤ��󡣥ǥե����ư������ƺ����ؤ�
-" �����������Ѥ��Ʋ�������
+" 読み込み後、変数g:gvimrc_local_finishが非0の値に設定されていた場合には本設
+" 定ファイルに書かれた内容は一切実行されません。デフォルト動作を全て差し替え
+" たい場合に利用して下さい。
 "
-" ����:
+" 参考:
 "   :help gvimrc
 "   :echo $HOME
 "   :echo $VIM
 "   :version
 "---------------------------------------------------------------------------
-" �����ȥ������������($VIM/gvimrc_local.vim)��������ɤ߹��ࡣ�ɤ߹������
-" ���ѿ�g:gvimrc_local_finish����0���ͤ����ꤵ��Ƥ������ˤϡ�����ʾ����
-" ��ե�������ɹ�����ߤ��롣
+" サイトローカルな設定($VIM/gvimrc_local.vim)があれば読み込む。読み込んだ後
+" に変数g:gvimrc_local_finishに非0な値が設定されていた場合には、それ以上の設
+" 定ファイルの読込を中止する。
 if 1 && filereadable($VIM . '/gvimrc_local.vim')
   source $VIM/gvimrc_local.vim
   if exists('g:gvimrc_local_finish') && g:gvimrc_local_finish != 0
@@ -40,9 +40,9 @@ if 1 && filereadable($VIM . '/gvimrc_local.vim')
   endif
 endif
 "---------------------------------------------------------------------------
-" �桼��ͥ������($HOME/.gvimrc_first.vim)��������ɤ߹��ࡣ�ɤ߹���������
-" ��g:gvimrc_first_finish����0���ͤ����ꤵ��Ƥ������ˤϡ�����ʾ������
-" �ե�������ɹ�����ߤ��롣
+" ユーザ優先設定($HOME/.gvimrc_first.vim)があれば読み込む。読み込んだ後に変
+" 数g:gvimrc_first_finishに非0な値が設定されていた場合には、それ以上の設定
+" ファイルの読込を中止する。
 if 0 && exists('$HOME') && filereadable($HOME . '/.gvimrc_first.vim')
   unlet! g:gvimrc_first_finish
   source $HOME/.gvimrc_first.vim
@@ -51,13 +51,13 @@ if 0 && exists('$HOME') && filereadable($HOME . '/.gvimrc_first.vim')
   endif
 endif
 "---------------------------------------------------------------------------
-" Bram����󶡤���������򥤥󥯥롼�� (�̥ե�����:vimrc_example.vim)������
-" ������g:no_gvimrc_example����0���ͤ����ꤷ�Ƥ����Х��󥯥롼�ɤ��ʤ���
+" Bram氏の提供する設定例をインクルード (別ファイル:vimrc_example.vim)。これ
+" 以前にg:no_gvimrc_exampleに非0な値を設定しておけばインクルードしない。
 if 1 && (!exists('g:no_gvimrc_example') || g:no_gvimrc_example == 0)
   source $VIMRUNTIME/gvimrc_example.vim
 endif
 "---------------------------------------------------------------------------
-" ���顼����:
+" カラー設定:
 "colorscheme morning
 "colorscheme pablo
 "colorscheme desert256
@@ -77,73 +77,73 @@ endif
 colorscheme gentooish
 
 "---------------------------------------------------------------------------
-" �ե��������:
+" フォント設定:
 "
 if has('win32')
-  " Windows��
+  " Windows用
   "set guifont=McS_Konatu:h8:cSHIFTJIS
-  "set guifont="�椿�ݤ�ʥ����ǥ��󥰡�Backsl:h11:cSHIFTJIS"
+  "set guifont="ゆたぽん（コーディング）Backsl:h11:cSHIFTJIS"
   "set guifont=KonatuTohaba:h11:cSHIFTJIS
   set guifont=Migu_1M:h12:cSHIFTJIS
-  " �Դֳ֤�����
+  " 行間隔の設定
   set linespace=0
-  " ������UCSʸ��������ư��¬���Ʒ���
+  " 一部のUCS文字の幅を自動計測して決める
   if has('kaoriya')
     set ambiwidth=auto
   endif
 elseif has('mac')
-  set guifont=Osaka??????��:h14
+  set guifont=Osaka??????幅:h14
 elseif has('xfontset')
-  " UNIX�� (xfontset�����)
+  " UNIX用 (xfontsetを使用)
   set guifontset=a14,r14,k14
 endif
 "set guifont=UmePlus\ Gothic\ 12
 "---------------------------------------------------------------------------
-" ������ɥ��˴ؤ�������:
+" ウインドウに関する設定:
 "
 "
-" ������ɥ�����
-" ������ɥ��ι⤵
+" ウインドウの幅
+" ウインドウの高さ
 "set lines=54
-" ���ޥ�ɥ饤��ι⤵(GUI���ѻ�)
+" コマンドラインの高さ(GUI使用時)
 set cmdheight=1
-" ���̤���Ϥ���ˤ��� (���Ԥ���Ƭ�� " ���������ͭ���ˤʤ�)
-"colorscheme evening " (GUI���ѻ�)
+" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
+"colorscheme evening " (GUI使用時)
 set clipboard=unnamed
 "---------------------------------------------------------------------------
-" ���ܸ����Ϥ˴ؤ�������:
+" 日本語入力に関する設定:
 "
 if has('multi_byte_ime') || has('xim')
-  " IME ON���Υ�������ο�������(������:��)
+  " IME ON時のカーソルの色を設定(設定例:紫)
   highlight CursorIM guibg=Purple guifg=NONE
-  " �����⡼�ɡ������⡼�ɤǤΥǥե���Ȥ�IME��������
+  " 挿入モード・検索モードでのデフォルトのIME状態設定
   set iminsert=0 imsearch=0
   if has('xim') && has('GUI_GTK')
-    " XIM�����ϳ��ϥ���������:
-    " ������ s-space ��Shift+Space�ΰ�̣��kinput2+canna������
+    " XIMの入力開始キーを設定:
+    " 下記の s-space はShift+Spaceの意味でkinput2+canna用設定
     " set imactivatekey=s-space
   endif
-  " �����⡼�ɤǤ�IME���֤򵭲������ʤ���硢���ԤΥ����Ȥ���
+  " 挿入モードでのIME状態を記憶させない場合、次行のコメントを解除
   inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 endif
 
 set fileencoding=utf-8
 "---------------------------------------------------------------------------
-" �ޥ����˴ؤ�������:
+" マウスに関する設定:
 "
-" ����:
-" mousefocus�ϴ��Ĥ�����(����:������ɥ���ʬ�䤷�Ƥ���饤��˥������뤬����
-" �Ƥ�����ε�ư)������Τǥǥե���ȤǤ����ꤷ�ʤ���Windows�Ǥ�mousehide
-" �����ޥ������������Vim�Υ����ȥ�С����֤����ܸ�����Ϥ���ȥ�����餹��
-" �Ȥ�����������������
+" 解説:
+" mousefocusは幾つか問題(一例:ウィンドウを分割しているラインにカーソルがあっ
+" ている時の挙動)があるのでデフォルトでは設定しない。Windowsではmousehide
+" が、マウスカーソルをVimのタイトルバーに置き日本語を入力するとチラチラする
+" という問題を引き起す。
 "
-" �ɤΥ⡼�ɤǤ�ޥ�����Ȥ���褦�ˤ���
+" どのモードでもマウスを使えるようにする
 set mouse=a
-" �ޥ����ΰ�ư�ǥե���������ưŪ�����ؤ��ʤ� (mousefocus:���ؤ�)
+" マウスの移動でフォーカスを自動的に切替えない (mousefocus:切替る)
 set nomousefocus
-" ���ϻ��˥ޥ����ݥ��󥿤򱣤� (nomousehide:�����ʤ�)
+" 入力時にマウスポインタを隠す (nomousehide:隠さない)
 set mousehide
-" �ӥ��奢������(D&D¾)��ưŪ�˥���åץܡ��ɤ� (:help guioptions_a)
+" ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
 "set guioptions+=a
 set guioptions+=""
 "set guioptions+=M
@@ -154,38 +154,38 @@ set guioptions-=g
 set guioptions-=e
 set guioptions+=m
 "---------------------------------------------------------------------------
-" ��˥塼�˴ؤ�������:
+" メニューに関する設定:
 "
-" ����:
-" "M"���ץ���󤬻��ꤵ�줿�Ȥ��ϥ�˥塼("m")���ġ���С�("T")������Ͽ����
-" �ʤ��Τǡ���ưŪ�ˤ������ΰ��������褦�ˤ�������äơ��ǥե���ȤΤ�
-" ����̵�뤷�ƥ桼�����ȼ��ΰ켰����Ͽ�������ˤϡ�����餬ɽ������ʤ���
-" �������꤬�������롣���������ޤ�˥쥢�ʥ������Ǥ���ȹͤ�����Τ�̵�뤹
-" �롣
+" 解説:
+" "M"オプションが指定されたときはメニュー("m")・ツールバー("T")供に登録され
+" ないので、自動的にそれらの領域を削除するようにした。よって、デフォルトのそ
+" れらを無視してユーザが独自の一式を登録した場合には、それらが表示されないと
+" いう問題が生じ得る。しかしあまりにレアなケースであると考えられるので無視す
+" る。
 "
 if &guioptions =~# 'M'
   let &guioptions = substitute(&guioptions, '[mT]', '', 'g')
 endif
 "---------------------------------------------------------------------------
-" ����¾�����ɤ��˴ؤ�������:
+" その他、見栄えに関する設定:
 "
-" ����ʸ�����ϥ��饤�Ȥ��ʤ�(_vimrc�ǤϤʤ�_gvimrc�����ꤹ��ɬ�פ�����)
+" 検索文字列をハイライトしない(_vimrcではなく_gvimrcで設定する必要がある)
 "set nohlsearch
 "---------------------------------------------------------------------------
-" �����˴ؤ�������:
+" 印刷に関する設定:
 "
-" ����:
-" ������GUI�Ǥʤ��Ƥ�Ǥ���Τ�vimrc�����ꤷ���ۤ����ɤ����⤷��ʤ���������
-" ���Windows�ǤϤ��ʤ�ۣ�档����Ū�˰����ˤ���ī���ȸ����뤳�Ȥ�����餷
-" ���Τǥǥե���ȥե���Ȥ���ī�ˤ��Ƥ����������å���Ȥ��������ϥ�����
-" �����Ȥ��Ƥ���printfont�򻲹ͤˡ�
+" 注釈:
+" 印刷はGUIでなくてもできるのでvimrcで設定したほうが良いかもしれない。この辺
+" りはWindowsではかなり曖昧。一般的に印刷には明朝、と言われることがあるらし
+" いのでデフォルトフォントは明朝にしておく。ゴシックを使いたい場合はコメント
+" アウトしてあるprintfontを参考に。
 "
-" ����:
+" 参考:
 "   :hardcopy
 "   :help 'printfont'
 "   :help printing
 "
-" �����ѥե����
+" 印刷用フォント
 if has('printer')
   if has('win32')
     "set printfont=MS_Mincho:h12:cSHIFTJIS
@@ -219,9 +219,10 @@ function InsertTabWrapper()
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 set backupdir=$VIM/backup
+set undodir=$VIM/undo
 augroup BufferAu
     autocmd!
-    " �����ȥǥ��쥯�ȥ��ưŪ�˰�ư
+    " カレントディレクトリを自動的に移動
     autocmd BufNewFile,BufRead,BufEnter * if isdirectory(expand("%:p:h")) && bufname("%") !~ "NERD_tree" | cd %:p:h | endif
   augroup END
 noremap <CR> o<ESC>
@@ -244,36 +245,36 @@ if has("autocmd")
   " Use the default filetype settings. If you also want to load indent files
   " to automatically do language-dependent indenting add 'indent' as well.
   filetype plugin on
-  "���Υե����륿���פˤ��碌������ǥ�Ȥ����Ѥ���
+  "そのファイルタイプにあわせたインデントを利用する
   filetype indent on
-  " ������ft�Ǥϥ���ǥ�Ȥ�̵����
+  " これらのftではインデントを無効に
   "autocmd FileType php filetype indent off
  
   " autocmd FileType php :set indentexpr=
   autocmd FileType html :set indentexpr=
   autocmd FileType xhtml :set indentexpr=
 endif
-"����ǥ�Ȥϥ��ޡ��ȥ���ǥ��
+"インデントはスマートインデント
 set smartindent
-"����ʸ���󤬾�ʸ���ξ�����ʸ����ʸ������̤ʤ���������
+"検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
-"����ʸ�������ʸ�����ޤޤ�Ƥ�����϶��̤��Ƹ�������
+"検索文字列に大文字が含まれている場合は区別して検索する
 set smartcase
-"�������˺Ǹ�ޤǹԤä���ǽ�����
+"検索時に最後まで行ったら最初に戻る
 set wrapscan
-"����ʸ�������ϻ��˽缡�о�ʸ����˥ҥåȤ����ʤ�
+"検索文字列入力時に順次対象文字列にヒットさせない
 set noincsearch
-"���֤κ�¦�˥�������ɽ��
+"タブの左側にカーソル表示
 "set listchars=tab:\\
 set nolist
-"������Υ��ޥ�ɤ򥹥ơ�������ɽ������
+"入力中のコマンドをステータスに表示する
 set showcmd
-"������ϻ����б������̤�ɽ��
+"括弧入力時の対応する括弧を表示
 set showmatch
-"�������ʸ����Υϥ��饤�Ȥ�ͭ���ˤ��ʤ�
+"検索結果文字列のハイライトを有効にしない
 "set nohlsearch
-"���ơ������饤�����ɽ��
-"���ơ������饤���ɽ�����ʤ�
+"ステータスラインを常に表示
+"ステータスラインを表示しない
 set laststatus=1
 function! GetB()
   let c = matchstr(getline('.'), '.', col('.') - 1)
@@ -302,7 +303,7 @@ func! String2Hex(str)
   endwhile
   return out
 endfunc
-"���ơ������饤���ʸ�������ɤȲ���ʸ����ɽ������
+"ステータスラインに文字コードと改行文字を表示する
 " set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']['.&ft.']'}\ %F%=%l,%c%V%8P
 if winwidth(0) >= 120
   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
@@ -310,27 +311,27 @@ else
   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %l,%c%V%8P
 endif
 "set statusline=%{GetB()}
-" ���ޥ�ɥ饤���䴰����Ȥ��˶������줿��Τ�Ȥ�(���� :help wildmenu)
+" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 " set wildmenu
-" ���ޥ�ɥ饤����֤򥷥���äݤ�
+" コマンドライン補間をシェルっぽく
 set wildmode=list:longest
-" �Хåե����Խ���Ǥ⤽��¾�Υե�����򳫤���褦��
+" バッファが編集中でもその他のファイルを開けるように
 set hidden
-" �����Υ��ǥ������Խ���Υե����뤬�ѹ����줿�鼫ư���ɤ�ľ��
+" 外部のエディタで編集中のファイルが変更されたら自動で読み直す
 set autoread
-" command mode �� tcsh���Υ����Х���ɤ�
+" command mode 時 tcsh風のキーバインドに
 cmap <C-A> <Home>
 cmap <C-F> <Right>
 cmap <C-B> <Left>
 cmap <C-D> <Delete>
 cmap <Esc>b <S-Left>
 cmap <Esc>f <S-Right>
-"ɽ����ñ�̤ǹ԰�ư����
+"表示行単位で行移動する
 "nmap j gj
 "nmap k gk
 "vmap j gj
 "vmap k gk
-" ���������Ϥ��
+" いろいろ囲むよ
 fun! Quote(quote)
   normal mz
   exe 's/\(\k*\%#\k*\)/' . a:quote . '\1' . a:quote . '/'
@@ -354,17 +355,17 @@ nnoremap ,q[ :silent! normal mpea]<esc>bi[<esc>`pl
 nnoremap ,q{ :silent! normal mpea}<esc>bi{<esc>`pl
 " remove quotes from a word
 nnoremap ,qd :silent! normal mpeld bhd `ph<CR>
-" �����塢������˥ե��������򤢤碌��
+" 検索後、真ん中にフォーカスをあわせる
 nmap n nzz
 nmap N Nzz
 nmap * *zz
 nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
-"insert mode����c-j��ȴ����
+"insert mode時にc-jで抜ける
 imap <C-j> <esc>
 
-" ʸ�������ɤμ�ưǧ��
+" 文字コードの自動認識
 if &encoding !=# 'utf-8'
   set encoding=japan
   set fileencoding=japan
@@ -372,16 +373,16 @@ endif
 if has('iconv')
   let s:enc_euc = 'euc-jp'
   let s:enc_jis = 'iso-2022-jp'
-  " iconv��eucJP-ms���б����Ƥ��뤫������å�
+  " iconvがeucJP-msに対応しているかをチェック
   if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
     let s:enc_euc = 'eucjp-ms'
     let s:enc_jis = 'iso-2022-jp-3'
-  " iconv��JISX0213���б����Ƥ��뤫������å�
+  " iconvがJISX0213に対応しているかをチェック
   elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
     let s:enc_euc = 'euc-jisx0213'
     let s:enc_jis = 'iso-2022-jp-3'
   endif
-  " fileencodings����
+  " fileencodingsを構築
   if &encoding ==# 'utf-8'
     let s:fileencodings_default = &fileencodings
     let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
@@ -401,11 +402,11 @@ if has('iconv')
       let &fileencodings = &fileencodings .','. s:enc_euc
     endif
   endif
-  " ������ʬ
+  " 定数を処分
   unlet s:enc_euc
   unlet s:enc_jis
 endif
-" ���ܸ��ޤޤʤ����� fileencoding �� encoding ��Ȥ��褦�ˤ���
+" 日本語を含まない場合は fileencoding に encoding を使うようにする
 if has('autocmd')
   function! AU_ReCheck_FENC()
     if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
@@ -414,9 +415,9 @@ if has('autocmd')
   endfunction
   autocmd BufReadPost * call AU_ReCheck_FENC()
 endif
-" ���ԥ����ɤμ�ưǧ��
+" 改行コードの自動認識
 set fileformats=unix,dos,mac
-" ���Ȥ�����ʸ�������äƤ⥫��������֤�����ʤ��褦�ˤ���
+" □とか○の文字があってもカーソル位置がずれないようにする
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
@@ -426,7 +427,7 @@ endif
 
 "map / :Migemo<CR>
 
-"SSH�ǥե�����򳫤����������
+"SSHでファイルを開くための設定
 if (has('win32') || has('win64'))
 "use scp
 "let g:netrw_scp_cmd = "C:\\Users\\sei\\Documents\\tools\\putty\\pscp.exe -q -batch"
@@ -439,39 +440,39 @@ set visualbell
 nmap <F8> :TagbarToggle<CR>
 
 "-------------------------------------------------------------------------------
-" �������� Basics
+" 基本設定 Basics
 "-------------------------------------------------------------------------------
-let mapleader = ","              " �����ޥåץ꡼����
-set scrolloff=5                  " �������������;�����
-set textwidth=0                  " ��Ԥ�Ĺ��ʸ�Ϥ�񤤤Ƥ��Ƥ⼫ư�ޤ��֤��򤷤ʤ�
-set nobackup                     " �Хå����å׼��ʤ�
-set autoread                     " ¾�ǽ񤭴�����줿�鼫ư���ɤ�ľ��
-set noswapfile                   " ����åץե�������ʤ�
-set hidden                       " �Խ���Ǥ�¾�Υե�����򳫤���褦�ˤ���
-set backspace=indent,eol,start   " �Хå����ڡ����Ǥʤ�Ǥ�ä���褦��
-set formatoptions=lmoq           " �ƥ������������ץ���󡤥ޥ���Х��ȷϤ��ɲ�
-set vb t_vb=                     " �ӡ��פ�ʤ餵�ʤ�
-set browsedir=buffer             " Explore�ν���ǥ��쥯�ȥ�
-set whichwrap=b,s,h,l,<,>,[,]    " ����������Ƭ�������ǻߤޤ�ʤ��褦�ˤ���
-set showcmd                      " ���ޥ�ɤ򥹥ơ������Ԥ�ɽ��
-set showmode                     " ���ߤΥ⡼�ɤ�ɽ��
-set viminfo='50,<1000,s100,\"50  " viminfo�ե����������
-set modelines=0                  " �⡼�ɥ饤���̵��
-set notitle                      " vim��ȤäƤ���Ƥ��꤬�Ȥ�
+let mapleader = ","              " キーマップリーダー
+set scrolloff=5                  " スクロール時の余白確保
+set textwidth=0                  " 一行に長い文章を書いていても自動折り返しをしない
+set nobackup                     " バックアップ取らない
+set autoread                     " 他で書き換えられたら自動で読み直す
+set noswapfile                   " スワップファイル作らない
+set hidden                       " 編集中でも他のファイルを開けるようにする
+set backspace=indent,eol,start   " バックスペースでなんでも消せるように
+set formatoptions=lmoq           " テキスト整形オプション，マルチバイト系を追加
+set vb t_vb=                     " ビープをならさない
+set browsedir=buffer             " Exploreの初期ディレクトリ
+set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+set showcmd                      " コマンドをステータス行に表示
+set showmode                     " 現在のモードを表示
+set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
+set modelines=0                  " モードラインは無効
+set notitle                      " vimを使ってくれてありがとう
 
-" OS�Υ���åץܡ��ɤ���Ѥ���
+" OSのクリップボードを使用する
 set clipboard+=unnamed
-" �����ߥʥ�ǥޥ�������ѤǤ���褦�ˤ���
+" ターミナルでマウスを使用できるようにする
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
-"��󥯤���ʸ���ϡ������ƥ�Υ���åץܡ��ɤ������"
+"ヤンクした文字は、システムのクリップボードに入れる"
 set clipboard=unnamed
-" �����⡼�ɤ�Ctrl+k�򲡤��ȥ���åץܡ��ɤ����Ƥ�Ž���դ�����褦�ˤ��� "
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
 imap <C-p>  <ESC>"*pa
 
-" Ev/Rv��vimrc���Խ���ȿ��
+" Ev/Rvでvimrcの編集と反映
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
 
@@ -485,7 +486,7 @@ if exists("g:did_load_filetypes")
   filetype plugin indent off
 endif
 
-" �ե����륿����Ƚ���on
+" ファイルタイプ判定をon
 filetype plugin on
 
 set cursorline
