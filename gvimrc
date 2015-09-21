@@ -3,7 +3,7 @@
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 20-Sep-2015.
+" Last Change: 21-Sep-2015.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -108,8 +108,6 @@ endif
 " コマンドラインの高さ(GUI使用時)
 set cmdheight=1
 " 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
-"colorscheme evening " (GUI使用時)
-set clipboard=unnamed
 "---------------------------------------------------------------------------
 " 日本語入力に関する設定:
 "
@@ -145,13 +143,13 @@ set nomousefocus
 set mousehide
 " ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
 "set guioptions+=a
-set guioptions+=""
+"set guioptions+=""
 "set guioptions+=M
 set guioptions-=T
 set guioptions-=L
-set guioptions-=r
-set guioptions-=g
-set guioptions-=e
+set guioptions+=r
+set guioptions+=g
+set guioptions+=e
 set guioptions+=m
 "---------------------------------------------------------------------------
 " メニューに関する設定:
@@ -203,7 +201,6 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-":source $VIMRUNTIME/macros/cd.vim
 function InsertTabWrapper()
     if pumvisible()
         return "\<c-n>"
@@ -218,8 +215,9 @@ function InsertTabWrapper()
     endif
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-set backupdir=$VIM/backup
-set undodir=$VIM/undo
+set directory=$VIM/tmp
+set backupdir=$VIM/tmp/backup
+set undodir=$VIM/tmp/undo
 augroup BufferAu
     autocmd!
     " カレントディレクトリを自動的に移動
@@ -230,7 +228,6 @@ set nocompatible  " Use Vim defaults instead of 100% vi compatibility
 set backspace=indent,eol,start  " more powerful backspacing
 " Now we set some defaults for the editor
 set textwidth=0   " Don't wrap words by default
-set nobackup    " Don't keep a backup file
 set viminfo='50,<1000,s100,\"50 " read/write a .viminfo file, don't store more than
 "set viminfo='50,<1000,s100,:0,n~/.vim/viminfo
 set history=100   " keep 50 lines of command line history
@@ -274,13 +271,14 @@ set showmatch
 "検索結果文字列のハイライトを有効にしない
 "set nohlsearch
 "ステータスラインを常に表示
-"ステータスラインを表示しない
-set laststatus=1
+set laststatus=2
+
 function! GetB()
   let c = matchstr(getline('.'), '.', col('.') - 1)
   let c = iconv(c, &enc, &fenc)
   return String2Hex(c)
 endfunction
+
 " :help eval-examples
 " The function Nr2Hex() returns the Hex string of a number.
 func! Nr2Hex(nr)
@@ -292,6 +290,7 @@ func! Nr2Hex(nr)
   endwhile
   return r
 endfunc
+
 " The function String2Hex() converts each character in a string to a two
 " character Hex string.
 func! String2Hex(str)
@@ -303,6 +302,7 @@ func! String2Hex(str)
   endwhile
   return out
 endfunc
+
 "ステータスラインに文字コードと改行文字を表示する
 " set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']['.&ft.']'}\ %F%=%l,%c%V%8P
 if winwidth(0) >= 120
@@ -310,6 +310,7 @@ if winwidth(0) >= 120
 else
   set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %l,%c%V%8P
 endif
+
 "set statusline=%{GetB()}
 " コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 " set wildmenu
@@ -320,41 +321,42 @@ set hidden
 " 外部のエディタで編集中のファイルが変更されたら自動で読み直す
 set autoread
 " command mode 時 tcsh風のキーバインドに
-cmap <C-A> <Home>
-cmap <C-F> <Right>
-cmap <C-B> <Left>
-cmap <C-D> <Delete>
-cmap <Esc>b <S-Left>
-cmap <Esc>f <S-Right>
+"cmap <C-A> <Home>
+"cmap <C-F> <Right>
+"cmap <C-B> <Left>
+"cmap <C-D> <Delete>
+"cmap <Esc>b <S-Left>
+"cmap <Esc>f <S-Right>
 "表示行単位で行移動する
-"nmap j gj
-"nmap k gk
-"vmap j gj
-"vmap k gk
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
 " いろいろ囲むよ
-fun! Quote(quote)
-  normal mz
-  exe 's/\(\k*\%#\k*\)/' . a:quote . '\1' . a:quote . '/'
-  normal `zl
-endfun
-fun! UnQuote()
-  normal mz
-  exe 's/["' . "'" . ']\(\k*\%#\k*\)[' . "'" . '"]/\1/'
-  exe 's/\(["' . "'" . ']\)\(\k*\%#\k*\)\1/\2/'
-  normal `z
-endfun
-nnoremap <silent> ,q" :call Quote('"')<CR>
-nnoremap <silent> ,q' :call Quote("'")<CR>
-nnoremap <silent> ,qd :call UnQuote()<CR>
-" 'quote' a word
-nnoremap ,q' :silent! normal mpea'<esc>bi'<esc>`pl
-" double "quote" a word
-nnoremap ,q" :silent! normal mpea"<esc>bi"<esc>`pl
-nnoremap ,q( :silent! normal mpea)<esc>bi(<esc>`pl
-nnoremap ,q[ :silent! normal mpea]<esc>bi[<esc>`pl
-nnoremap ,q{ :silent! normal mpea}<esc>bi{<esc>`pl
-" remove quotes from a word
-nnoremap ,qd :silent! normal mpeld bhd `ph<CR>
+"fun! Quote(quote)
+"  normal mz
+"  exe 's/\(\k*\%#\k*\)/' . a:quote . '\1' . a:quote . '/'
+"  normal `zl
+"endfun
+"fun! UnQuote()
+"  normal mz
+"  exe 's/["' . "'" . ']\(\k*\%#\k*\)[' . "'" . '"]/\1/'
+"  exe 's/\(["' . "'" . ']\)\(\k*\%#\k*\)\1/\2/'
+"  normal `z
+"endfun
+"
+"nnoremap <silent> ,q" :call Quote('"')<CR>
+"nnoremap <silent> ,q' :call Quote("'")<CR>
+"nnoremap <silent> ,qd :call UnQuote()<CR>
+"" 'quote' a word
+"nnoremap ,q' :silent! normal mpea'<esc>bi'<esc>`pl
+"" double "quote" a word
+"nnoremap ,q" :silent! normal mpea"<esc>bi"<esc>`pl
+"nnoremap ,q( :silent! normal mpea)<esc>bi(<esc>`pl
+"nnoremap ,q[ :silent! normal mpea]<esc>bi[<esc>`pl
+"nnoremap ,q{ :silent! normal mpea}<esc>bi{<esc>`pl
+"" remove quotes from a word
+"nnoremap ,qd :silent! normal mpeld bhd `ph<CR>
 " 検索後、真ん中にフォーカスをあわせる
 nmap n nzz
 nmap N Nzz
@@ -422,9 +424,6 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-:set runtimepath+=~/.vim/chalice
-:runtime plugin/chalice.vim
-
 "map / :Migemo<CR>
 
 "SSHでファイルを開くための設定
@@ -445,10 +444,10 @@ nmap <F8> :TagbarToggle<CR>
 let mapleader = ","              " キーマップリーダー
 set scrolloff=5                  " スクロール時の余白確保
 set textwidth=0                  " 一行に長い文章を書いていても自動折り返しをしない
-set nobackup                     " バックアップ取らない
+"set nobackup                     " バックアップ取らない
 set autoread                     " 他で書き換えられたら自動で読み直す
-set noswapfile                   " スワップファイル作らない
-set hidden                       " 編集中でも他のファイルを開けるようにする
+"set noswapfile                   " スワップファイル作らない
+"set hidden                       " 編集中でも他のファイルを開けるようにする
 set backspace=indent,eol,start   " バックスペースでなんでも消せるように
 set formatoptions=lmoq           " テキスト整形オプション，マルチバイト系を追加
 set vb t_vb=                     " ビープをならさない
@@ -467,8 +466,6 @@ set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
-"ヤンクした文字は、システムのクリップボードに入れる"
-set clipboard=unnamed
 " 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
 imap <C-p>  <ESC>"*pa
 
