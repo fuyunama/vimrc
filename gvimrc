@@ -84,7 +84,7 @@ if has('win32')
   "set guifont=McS_Konatu:h8:cSHIFTJIS
   "set guifont="ゆたぽん（コーディング）Backsl:h11:cSHIFTJIS"
   "set guifont=KonatuTohaba:h11:cSHIFTJIS
-  set guifont=Migu_1M:h12:cSHIFTJIS
+  "set guifont=Migu_1M:h12:cSHIFTJIS
   " 行間隔の設定
   set linespace=0
   " 一部のUCS文字の幅を自動計測して決める
@@ -201,20 +201,7 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-function InsertTabWrapper()
-    if pumvisible()
-        return "\<c-n>"
-    endif
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
-        return "\<tab>"
-    elseif exists('&omnifunc') && &omnifunc == ''
-        return "\<c-n>"
-    else
-        return "\<c-x>\<c-o>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
 set directory=$VIM/tmp
 set backupdir=$VIM/tmp/backup
 set undodir=$VIM/tmp/undo
@@ -236,6 +223,7 @@ set ruler   " show the cursor position all the time
 " These are files we are not likely to want to edit or read.
 "
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
 syntax on
 if has("autocmd")
   " Enabled file type detection
@@ -268,52 +256,9 @@ set nolist
 set showcmd
 "括弧入力時の対応する括弧を表示
 set showmatch
-"検索結果文字列のハイライトを有効にしない
-"set nohlsearch
 "ステータスラインを常に表示
 set laststatus=2
 
-function! GetB()
-  let c = matchstr(getline('.'), '.', col('.') - 1)
-  let c = iconv(c, &enc, &fenc)
-  return String2Hex(c)
-endfunction
-
-" :help eval-examples
-" The function Nr2Hex() returns the Hex string of a number.
-func! Nr2Hex(nr)
-  let n = a:nr
-  let r = ""
-  while n
-    let r = '0123456789ABCDEF'[n % 16] . r
-    let n = n / 16
-  endwhile
-  return r
-endfunc
-
-" The function String2Hex() converts each character in a string to a two
-" character Hex string.
-func! String2Hex(str)
-  let out = ''
-  let ix = 0
-  while ix < strlen(a:str)
-    let out = out . Nr2Hex(char2nr(a:str[ix]))
-    let ix = ix + 1
-  endwhile
-  return out
-endfunc
-
-"ステータスラインに文字コードと改行文字を表示する
-" set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']['.&ft.']'}\ %F%=%l,%c%V%8P
-if winwidth(0) >= 120
-  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %F%=[%{GetB()}]\ %l,%c%V%8P
-else
-  set statusline=%<[%n]%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%y\ %f%=[%{GetB()}]\ %l,%c%V%8P
-endif
-
-"set statusline=%{GetB()}
-" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
-" set wildmenu
 " コマンドライン補間をシェルっぽく
 set wildmode=list:longest
 " バッファが編集中でもその他のファイルを開けるように
@@ -332,31 +277,7 @@ nmap j gj
 nmap k gk
 vmap j gj
 vmap k gk
-" いろいろ囲むよ
-"fun! Quote(quote)
-"  normal mz
-"  exe 's/\(\k*\%#\k*\)/' . a:quote . '\1' . a:quote . '/'
-"  normal `zl
-"endfun
-"fun! UnQuote()
-"  normal mz
-"  exe 's/["' . "'" . ']\(\k*\%#\k*\)[' . "'" . '"]/\1/'
-"  exe 's/\(["' . "'" . ']\)\(\k*\%#\k*\)\1/\2/'
-"  normal `z
-"endfun
-"
-"nnoremap <silent> ,q" :call Quote('"')<CR>
-"nnoremap <silent> ,q' :call Quote("'")<CR>
-"nnoremap <silent> ,qd :call UnQuote()<CR>
-"" 'quote' a word
-"nnoremap ,q' :silent! normal mpea'<esc>bi'<esc>`pl
-"" double "quote" a word
-"nnoremap ,q" :silent! normal mpea"<esc>bi"<esc>`pl
-"nnoremap ,q( :silent! normal mpea)<esc>bi(<esc>`pl
-"nnoremap ,q[ :silent! normal mpea]<esc>bi[<esc>`pl
-"nnoremap ,q{ :silent! normal mpea}<esc>bi{<esc>`pl
-"" remove quotes from a word
-"nnoremap ,qd :silent! normal mpeld bhd `ph<CR>
+
 " 検索後、真ん中にフォーカスをあわせる
 nmap n nzz
 nmap N Nzz
@@ -364,6 +285,7 @@ nmap * *zz
 nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
+
 "insert mode時にc-jで抜ける
 imap <C-j> <esc>
 
@@ -466,12 +388,14 @@ set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
-" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
+" 挿入モードでCtrl+pを押すとクリップボードの内容を貼り付けられるようにする "
 imap <C-p>  <ESC>"*pa
 
 " Ev/Rvでvimrcの編集と反映
+let $MYVIMRC = $VIM . '/gvimrc'
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
+
 
 set helpfile=$VIMRUNTIME/doc/help.txt
 
@@ -483,7 +407,7 @@ if exists("g:did_load_filetypes")
   filetype plugin indent off
 endif
 
-" ファイルタイプ判定をon
+"ファイルタイプ判定をon
 filetype plugin on
 
 set cursorline
