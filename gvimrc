@@ -3,7 +3,7 @@
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 21-Sep-2015.
+" Last Change: 28-Sep-2015.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -58,6 +58,7 @@ if 1 && (!exists('g:no_gvimrc_example') || g:no_gvimrc_example == 0)
 endif
 "---------------------------------------------------------------------------
 " カラー設定:
+set background=light
 "colorscheme morning
 "colorscheme pablo
 "colorscheme desert256
@@ -74,7 +75,8 @@ endif
 "colorscheme gravity
 "colorscheme zazen
 "colorscheme eddie
-colorscheme gentooish
+"colorscheme gentooish
+colorscheme github
 
 "---------------------------------------------------------------------------
 " フォント設定:
@@ -85,6 +87,7 @@ if has('win32')
   "set guifont="ゆたぽん（コーディング）Backsl:h11:cSHIFTJIS"
   "set guifont=KonatuTohaba:h11:cSHIFTJIS
   "set guifont=Migu_1M:h12:cSHIFTJIS
+  set guifont=FixedSys:h14:cSHIFTJIS
   " 行間隔の設定
   set linespace=0
   " 一部のUCS文字の幅を自動計測して決める
