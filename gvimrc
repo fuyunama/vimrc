@@ -3,7 +3,7 @@
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 28-Sep-2015.
+" Last Change: 19-Mar-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -87,7 +87,8 @@ if has('win32')
   "set guifont="ゆたぽん（コーディング）Backsl:h11:cSHIFTJIS"
   "set guifont=KonatuTohaba:h11:cSHIFTJIS
   "set guifont=Migu_1M:h12:cSHIFTJIS
-  set guifont=FixedSys:h14:cSHIFTJIS
+  "set guifont=FixedSys:h14:cSHIFTJIS
+  set guifont=MyricaM_M:h13:cSHIFTJIS
   " 行間隔の設定
   set linespace=0
   " 一部のUCS文字の幅を自動計測して決める
@@ -189,7 +190,6 @@ endif
 " 印刷用フォント
 if has('printer')
   if has('win32')
-    "set printfont=MS_Mincho:h12:cSHIFTJIS
     set printfont=MS_Gothic:h12:cSHIFTJIS
   endif
 endif
@@ -201,9 +201,9 @@ endif
 set nocp
 filetype plugin on
 set expandtab
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 set directory=$VIM/tmp
 set backupdir=$VIM/tmp/backup
@@ -349,20 +349,7 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-"map / :Migemo<CR>
-
-"SSHでファイルを開くための設定
-if (has('win32') || has('win64'))
-"use scp
-"let g:netrw_scp_cmd = "C:\\Users\\sei\\Documents\\tools\\putty\\pscp.exe -q -batch"
-let g:netrw_scp_cmd = "C:\\Users\\sei\\Documents\\tools\\putty\\pscp.exe"
-let g:netrw_sftp_cmd = "C:\\Users\\sei\\Documents\\tools\\putty\\psftp.exe"
-let g:netrw_ssh_cmd = "C:\\Users\\sei\\Documents\\tools\\putty\\plink.exe"
-endif
-
 set visualbell
-nmap <F8> :TagbarToggle<CR>
-
 "-------------------------------------------------------------------------------
 " 基本設定 Basics
 "-------------------------------------------------------------------------------
@@ -382,7 +369,7 @@ set showcmd                      " コマンドをステータス行に表示
 set showmode                     " 現在のモードを表示
 set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
 set modelines=0                  " モードラインは無効
-set notitle                      " vimを使ってくれてありがとう
+"set notitle                      " vimを使ってくれてありがとう
 
 " OSのクリップボードを使用する
 set clipboard+=unnamed
@@ -398,7 +385,6 @@ imap <C-p>  <ESC>"*pa
 let $MYVIMRC = $VIM . '/gvimrc'
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
-
 
 set helpfile=$VIMRUNTIME/doc/help.txt
 
