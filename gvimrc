@@ -201,6 +201,8 @@ if has('printer')
 endif
 
 " Copyright (C) 2009-2013 KaoriYa/MURAOKA Taro
+"以上、香り屋の設定
+"My settings are below.
 
 set nocp
 filetype plugin on
