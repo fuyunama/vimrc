@@ -1,9 +1,10 @@
+scriptencoding utf-8
 " vim:set ts=8 sts=2 sw=2 tw=0: (この行に関しては:help modelineを参照)
 "
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 19-Mar-2016.
+" Last Change: 20-Mar-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -29,6 +30,7 @@
 "   :echo $HOME
 "   :echo $VIM
 "   :version
+
 "---------------------------------------------------------------------------
 " サイトローカルな設定($VIM/gvimrc_local.vim)があれば読み込む。読み込んだ後
 " に変数g:gvimrc_local_finishに非0な値が設定されていた場合には、それ以上の設
@@ -39,6 +41,7 @@ if 1 && filereadable($VIM . '/gvimrc_local.vim')
     finish
   endif
 endif
+
 "---------------------------------------------------------------------------
 " ユーザ優先設定($HOME/.gvimrc_first.vim)があれば読み込む。読み込んだ後に変
 " 数g:gvimrc_first_finishに非0な値が設定されていた場合には、それ以上の設定
@@ -50,12 +53,14 @@ if 0 && exists('$HOME') && filereadable($HOME . '/.gvimrc_first.vim')
     finish
   endif
 endif
+
 "---------------------------------------------------------------------------
 " Bram氏の提供する設定例をインクルード (別ファイル:vimrc_example.vim)。これ
 " 以前にg:no_gvimrc_exampleに非0な値を設定しておけばインクルードしない。
 if 1 && (!exists('g:no_gvimrc_example') || g:no_gvimrc_example == 0)
   source $VIMRUNTIME/gvimrc_example.vim
 endif
+
 "---------------------------------------------------------------------------
 " カラー設定:
 set background=light
@@ -101,17 +106,16 @@ elseif has('xfontset')
   " UNIX用 (xfontsetを使用)
   set guifontset=a14,r14,k14
 endif
-"set guifont=UmePlus\ Gothic\ 12
+
 "---------------------------------------------------------------------------
 " ウインドウに関する設定:
 "
-"
 " ウインドウの幅
+"set columns=80
 " ウインドウの高さ
 "set lines=54
 " コマンドラインの高さ(GUI使用時)
 set cmdheight=1
-" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
 "---------------------------------------------------------------------------
 " 日本語入力に関する設定:
 "
@@ -123,13 +127,12 @@ if has('multi_byte_ime') || has('xim')
   if has('xim') && has('GUI_GTK')
     " XIMの入力開始キーを設定:
     " 下記の s-space はShift+Spaceの意味でkinput2+canna用設定
-    " set imactivatekey=s-space
+    "set imactivatekey=s-space
   endif
   " 挿入モードでのIME状態を記憶させない場合、次行のコメントを解除
   inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
 endif
 
-set fileencoding=utf-8
 "---------------------------------------------------------------------------
 " マウスに関する設定:
 "
@@ -168,11 +171,13 @@ set guioptions+=m
 if &guioptions =~# 'M'
   let &guioptions = substitute(&guioptions, '[mT]', '', 'g')
 endif
+
 "---------------------------------------------------------------------------
 " その他、見栄えに関する設定:
 "
 " 検索文字列をハイライトしない(_vimrcではなく_gvimrcで設定する必要がある)
 "set nohlsearch
+
 "---------------------------------------------------------------------------
 " 印刷に関する設定:
 "
@@ -191,13 +196,12 @@ endif
 if has('printer')
   if has('win32')
     set printfont=MS_Gothic:h12:cSHIFTJIS
+    "set printfont=MS_Gothic:h12:cSHIFTJIS
   endif
 endif
-" Copyright (C) 2007 KaoriYa/MURAOKA Taro
-"source $VIM/runtime/mswin.vim
-"let g:orememo_dir = 'C:\.orememo'
-"source $VIM/runtime/orememo.vim
-"let $PATH = $VIM
+
+" Copyright (C) 2009-2013 KaoriYa/MURAOKA Taro
+
 set nocp
 filetype plugin on
 set expandtab
@@ -220,7 +224,7 @@ set backspace=indent,eol,start  " more powerful backspacing
 set textwidth=0   " Don't wrap words by default
 set viminfo='50,<1000,s100,\"50 " read/write a .viminfo file, don't store more than
 "set viminfo='50,<1000,s100,:0,n~/.vim/viminfo
-set history=100   " keep 50 lines of command line history
+set history=100 " keep 100 lines of command line history
 set ruler   " show the cursor position all the time
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -368,7 +372,7 @@ set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらな
 set showcmd                      " コマンドをステータス行に表示
 set showmode                     " 現在のモードを表示
 set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
-set modelines=0                  " モードラインは無効
+"set modelines=0                  " モードラインは無効
 "set notitle                      " vimを使ってくれてありがとう
 
 " OSのクリップボードを使用する
