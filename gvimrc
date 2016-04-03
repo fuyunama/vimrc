@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 27-Mar-2016.
+" Last Change: 03-Apr-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -452,9 +452,10 @@ function! s:unite_my_settings()"{{{
 endfunction"}}}
 
 set encoding=utf-8
-set rop:type:directx,renmode:5,taamode:1,geom:1,level:3,gamma:1,contrast:1
+set renderoptions:type:directx,renmode:5,taamode:1,geom:1,gamma:2.2,contrast:2
 
 "英語メニューにする
 source $VIMRUNTIME/delmenu.vim 
 set langmenu=none 
 source $VIMRUNTIME/menu.vim
+set printheader=%<%f%h%m%=Page\ %N
