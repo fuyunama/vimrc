@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 03-Apr-2016.
+" Last Change: 03-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -80,9 +80,9 @@ set background=light
 "colorscheme gravity
 "colorscheme zazen
 "colorscheme eddie
-"colorscheme gentooish
+colorscheme gentooish
 "colorscheme github
-colorscheme PaperColor
+"colorscheme PaperColor
 
 "---------------------------------------------------------------------------
 " フォント設定:
@@ -90,12 +90,8 @@ colorscheme PaperColor
 if has('win32')
   " Windows用
   "set guifont=McS_Konatu:h8:cSHIFTJIS
-  "set guifont="ゆたぽん（コーディング）Backsl:h11:cSHIFTJIS"
-  "set guifont=KonatuTohaba:h11:cSHIFTJIS
-  "set guifont=Migu_1M:h12:cSHIFTJIS
-  "set guifont=FixedSys:h14:cSHIFTJIS
-  "set guifont=MyricaM_M:h13:cSHIFTJIS
-  set guifont=MyricaM_M:h12:cSHIFTJIS
+  "set guifont=MyricaM_M:h12:cSHIFTJIS
+  set guifont=Myrica_M:h12:cSHIFTJIS
   " 行間隔の設定
   set linespace=0
   " 一部のUCS文字の幅を自動計測して決める
@@ -198,7 +194,6 @@ endif
 if has('printer')
   if has('win32')
     set printfont=MS_Gothic:h12:cSHIFTJIS
-    "set printfont=MS_Gothic:h12:cSHIFTJIS
   endif
 endif
 
@@ -335,6 +330,7 @@ if has('autocmd')
   endfunction
   autocmd BufReadPost * call AU_ReCheck_FENC()
 endif
+
 " 改行コードの自動認識
 set fileformats=unix,dos,mac
 " □とか○の文字があってもカーソル位置がずれないようにする
@@ -394,13 +390,10 @@ filetype plugin on
 
 set cursorline
 
-AirlineTheme cool
-
 augroup hack234
   autocmd!
   if has('win32')
     autocmd FocusGained * set transparency=255
-    "autocmd FocusLost * set transparency=228
     autocmd FocusLost * set transparency=200
   endif
 augroup END
@@ -452,10 +445,13 @@ function! s:unite_my_settings()"{{{
 endfunction"}}}
 
 set encoding=utf-8
-set renderoptions:type:directx,renmode:5,taamode:1,geom:1,gamma:2.2,contrast:2
+"set renderoptions:type:directx,renmode:5,taamode:1,geom:1,gamma:1900,contrast:1,level:100
+set renderoptions:type:directx,renmode:5,taamode:1,geom:1
 
 "英語メニューにする
 source $VIMRUNTIME/delmenu.vim 
 set langmenu=none 
 source $VIMRUNTIME/menu.vim
 set printheader=%<%f%h%m%=Page\ %N
+
+AirlineTheme cool
