@@ -63,7 +63,7 @@ endif
 
 "---------------------------------------------------------------------------
 " カラー設定:
-set background=light
+set background=dark
 "colorscheme morning
 "colorscheme pablo
 "colorscheme desert256
@@ -92,6 +92,7 @@ if has('win32')
   "set guifont=McS_Konatu:h8:cSHIFTJIS
   "set guifont=MyricaM_M:h12:cSHIFTJIS
   set guifont=Myrica_M:h12:cSHIFTJIS
+
   " 行間隔の設定
   set linespace=0
   " 一部のUCS文字の幅を自動計測して決める
@@ -454,4 +455,9 @@ set langmenu=none
 source $VIMRUNTIME/menu.vim
 set printheader=%<%f%h%m%=Page\ %N
 
-AirlineTheme cool
+AirlineTheme kalisi 
+
+" タブページを常に表示
+set showtabline=2
+" gVimでもテキストベースのタブページを使う
+set guioptions-=e
