@@ -1,29 +1,41 @@
-
-" Bundle Config Start
-filetype off
-
-if has('vim_starting')
-  set nocompatible
-  " 初回起動時のみruntimepathにneobundleのパスを指定する
-  set runtimepath+=$VIM/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
-" NeoBundleを初期化
-let bundlePath = $VIM . '/bundle/'
-call neobundle#begin(expand(bundlePath))
+" Required:
+set runtimepath+=$VIM/dein/repos/github.com/Shougo/dein.vim
 
-" インストールするプラグインをここに記述
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler'
-"NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
+" Required:
+call dein#begin($VIM . '/dein')
 
-call neobundle#end()
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
 
-filetype on
+" Add or remove your plugins here:
+"call dein#add('Shougo/neosnippet.vim')
+"call dein#add('Shougo/neosnippet-snippets')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+
+" You can specify revision/branch/tag.
+"call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+" Required:
+call dein#end()
+
+" Required:
 filetype plugin indent on
-" Bundle Config End
+
+" If you want to install not installed plugins on startup.
+"if dein#check_install()
+"  call dein#install()
+"endif
+
+"End dein Scripts-------------------------
+
+
 
 "let g:Powerline_symbols = 'unicode'
 "let g:airline_powerline_fonts = 1
