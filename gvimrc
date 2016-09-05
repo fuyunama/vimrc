@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 03-Sep-2016.
+" Last Change: 05-Sep-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -155,7 +155,7 @@ set guioptions-=T
 set guioptions-=L
 set guioptions+=r
 set guioptions+=g
-set guioptions+=e
+"set guioptions+=e
 set guioptions+=m
 "---------------------------------------------------------------------------
 " メニューに関する設定:
@@ -447,7 +447,8 @@ endfunction"}}}
 
 set encoding=utf-8
 "set renderoptions:type:directx,renmode:5,taamode:1,geom:1,gamma:1900,contrast:1,level:100
-set renderoptions:type:directx,renmode:5,taamode:1,geom:1
+set renderoptions:type:directx,renmode:5,taamode:1,geom:1,level:100
+"set renderoptions:type:directx,renmode:5,taamode:1,geom:1
 
 "英語メニューにする
 source $VIMRUNTIME/delmenu.vim 
