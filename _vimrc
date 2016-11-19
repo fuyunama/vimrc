@@ -3,11 +3,13 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=$VIM/dein/repos/github.com/Shougo/dein.vim
+let s:dein_dir = $VIM . '/dein'
 
 " Required:
-call dein#begin($VIM . '/dein')
+let &runtimepath .= ',' . s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" Required:
+call dein#begin(s:dein_dir)
 
 " Let dein manage dein
 " Required:
@@ -16,27 +18,36 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 "call dein#add('Shougo/neosnippet.vim')
 "call dein#add('Shougo/neosnippet-snippets')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
 
 " You can specify revision/branch/tag.
 "call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
+" プラグインリストを収めた TOML ファイル
+let s:toml      = s:dein_dir . '/dein.toml'
+let s:lazy_toml = s:dein_dir . '/dein_lazy.toml'
+
+" TOML を読み込み、キャッシュしておく
+call dein#load_toml(s:toml,      {'lazy': 0})
+call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
 " Required:
 call dein#end()
+
+" プラグインリストを収めたTOMLファイル
+let g:dein_dir = expand('~/.vim/dein')
+let s:toml = g:dein_dir . '/dein.toml'
+let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
 " Required:
 filetype plugin indent on
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
-
+if dein#check_install()
+  call dein#install()
+endif
 "End dein Scripts-------------------------
 
-
-
+"AirLine Settings-------------------------
 "let g:Powerline_symbols = 'unicode'
 "let g:airline_powerline_fonts = 1
 "set laststatus=2 " Always display the statusline in all windows
@@ -62,3 +73,4 @@ let g:airline#extensions#tabline#show_buffers = 0
 
 " 0でそのタブで開いてるウィンドウ数、1で左のタブから連番
 let g:airline#extensions#tabline#tab_nr_type = 1
+"End AirLine Settings---------------------
