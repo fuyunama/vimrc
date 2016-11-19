@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 19-Nov-2016.
+" Last Change: 20-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -372,7 +372,11 @@ set ttymouse=xterm2
 imap <C-p>  <ESC>"*pa
 
 " Ev/Rvでvimrcの編集と反映
-let $MYVIMRC = g:my_vim_dir . '/gvimrc'
+if has('win32')
+  let $MYVIMRC = g:my_vim_dir . '/gvimrc'
+else
+  let $MYVIMRC = $HOME . '/.gvimrc'
+endif
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
 
@@ -455,7 +459,7 @@ set langmenu=none
 source $VIMRUNTIME/menu.vim
 set printheader=%<%f%h%m%=Page\ %N
 
-AirlineTheme dark
+AirlineTheme powerlineish
 
 " タブページを常に表示
 set showtabline=2
