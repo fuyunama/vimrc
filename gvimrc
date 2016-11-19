@@ -210,7 +210,13 @@ set softtabstop=4
 
 let &directory = g:my_vim_dir . '/tmp'
 let &backupdir = g:my_vim_dir . '/tmp/backup'
+if !isdirectory(&backupdir)
+  call mkdir(iconv(&backupdir, &encoding, &termencoding), 'p')
+endif
 let &undodir = g:my_vim_dir . '/tmp/undo'
+if !isdirectory(&undodir)
+  call mkdir(iconv(&undodir, &encoding, &termencoding), 'p')
+endif
 
 augroup BufferAu
     autocmd!
