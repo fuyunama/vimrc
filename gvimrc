@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 13-Nov-2016.
+" Last Change: 19-Nov-2016.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -208,9 +208,9 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-set directory=$VIM/tmp
-set backupdir=$VIM/tmp/backup
-set undodir=$VIM/tmp/undo
+let &directory = g:my_vim_dir . '/tmp'
+let &backupdir = g:my_vim_dir . '/tmp/backup'
+let &undodir = g:my_vim_dir . '/tmp/undo'
 
 augroup BufferAu
     autocmd!
@@ -372,7 +372,7 @@ set ttymouse=xterm2
 imap <C-p>  <ESC>"*pa
 
 " Ev/Rvでvimrcの編集と反映
-let $MYVIMRC = $VIM . '/gvimrc'
+let $MYVIMRC = g:my_vim_dir . '/gvimrc'
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
 

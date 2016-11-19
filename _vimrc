@@ -1,9 +1,17 @@
+if has('win32')
+  " Windows用
+  let g:my_vim_dir = $VIM
+else
+  " Linuxとか
+  let g:my_vim_dir = $HOME . '/.vim'
+endif
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
-let s:dein_dir = $VIM . '/dein'
+let s:dein_dir = g:my_vim_dir . '/dein'
 
 " Required:
 let &runtimepath .= ',' . s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -32,11 +40,6 @@ call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
 " Required:
 call dein#end()
-
-" プラグインリストを収めたTOMLファイル
-let g:dein_dir = expand('~/.vim/dein')
-let s:toml = g:dein_dir . '/dein.toml'
-let s:lazy_toml = g:dein_dir . '/dein_lazy.toml'
 
 " Required:
 filetype plugin indent on
