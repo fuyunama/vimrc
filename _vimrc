@@ -13,8 +13,16 @@ endif
 
 let s:dein_dir = g:my_vim_dir . '/dein'
 
+" dein.vimのディレクトリ
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" なければgit clone
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+endif
+
 " Required:
-let &runtimepath .= ',' . s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let &runtimepath .= ',' . s:dein_repo_dir
 
 " Required:
 call dein#begin(s:dein_dir)
