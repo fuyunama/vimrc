@@ -4,7 +4,7 @@ scriptencoding utf-8
 " An example for a Japanese version gvimrc file.
 " 日本語版のデフォルトGUI設定ファイル(gvimrc) - Vim7用試作
 "
-" Last Change: 20-Nov-2016.
+" Last Change: 18-Jun-2017.
 " Maintainer:  MURAOKA Taro <koron@tka.att.ne.jp>
 "
 " 解説:
@@ -91,7 +91,9 @@ if has('win32')
   " Windows用
   "set guifont=McS_Konatu:h8:cSHIFTJIS
   "set guifont=MyricaM_M:h12:cSHIFTJIS
-  set guifont=Myrica_M:h12:cSHIFTJIS
+  set guifont=Fantasque_Sans_Mono:h12
+  "set guifontwide=Myrica_M:h12:cSHIFTJIS
+  set guifontwide=Migu_1M:h12:cSHIFTJIS
 
   " 行間隔の設定
   set linespace=0
@@ -457,7 +459,9 @@ endfunction"}}}
 
 set encoding=utf-8
 "set renderoptions:type:directx,renmode:5,taamode:1,geom:1,gamma:1900,contrast:1,level:100
-set renderoptions:type:directx,renmode:5,geom:1,taamode:1,gamma:1.7,level:90
+"set renderoptions:type:directx,renmode:5,geom:1,taamode:1,gamma:1.7,level:90
+"set renderoptions:type:directx,renmode:5,geom:1,gamma:1.9,level:1
+set renderoptions:type:directx,renmode:5,geom:1,gamma:1,level:100
 
 "英語メニューにする
 source $VIMRUNTIME/delmenu.vim 
